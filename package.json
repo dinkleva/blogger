@@ -4,7 +4,7 @@
   "description": "blogging website",
   "main": "index.js",
   "scripts": {
-    "devStart": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "author": "gaurav srivastava",
   "license": "MIT",
