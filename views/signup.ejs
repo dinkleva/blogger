@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%- include('./partials/head.ejs') %>
+
+        <body>
+            <style>
+                .signup_container {
+                    background: grey;
+                    width: 30vw;
+                    height: 80vh;
+                    position: absolute;
+                    left: 40%;
+                    top: 8rem;
+                    display: grid;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+
+
+
+                .signup_submit>button {
+                    width: 100px;
+                    height: 50px;
+                    background-color: blue;
+                    color: white;
+                }
+            </style>
+
+
+            <%- include('./partials/nav.ejs') %>
+                <div class="signup_container">
+                    <div class="signup_elements">
+                        <h1>Hello Please Sign-Up </h1>
+                        <form action="/user" method="POST">
+                            <div class="signup_page">
+                                <div class="signup_items">
+                                    <div class="signup_name">
+                                        <label for="name">
+                                            <h1>Name</h1>
+                                        </label>
+                                        <input type="text" name="name" id="name">
+                                    </div>
+                                    <div class="signup_emailid">
+                                        <label for="email">
+                                            <h1>Email</h1>
+                                        </label>
+                                        <input type="email" name="email" id="email">
+                                    </div>
+                                    <div class="signup_password">
+                                        <label for="password">
+                                            <h1>Password</h1>
+                                        </label>
+                                        <input type="password" name="password" id="password">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="signup_submit">
+                                <label for="submit">
+                                    <h1>Submit</h1>
+                                </label>
+                                <button type="submit" name="submit" value="ok">Signup</button>
+                            </div>
+                            
+                        </form>
+                        <div class="signin_link">
+                            <h4>Already Have an Account..</h4>
+                            <a href="/signin">Sign In</a>
+                        </div>
+                    </div>
+                </div>
+
+        </body>
+
+</html>
