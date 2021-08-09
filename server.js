@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 const { models } = require('mongoose')
+require('dotenv').config()
 
 
 
@@ -26,10 +27,14 @@ app.set('view engine', 'ejs');
 //connect to mongodb atlas database(gaurav-database)
 
 //const dbURI = process.env.MONGODB_URI
-const dbURI = "mongodb+srv://dinkleva_123:dinkleva123@cluster0.xhi9f.mongodb.net/gaurav-database?retryWrites=true&w=majority"
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => app.listen(3000))
-    .catch((err) => console.log(err));
+//const dbURI = "mongodb+srv://dinkleva_123:dinkleva123@cluster0.xhi9f.mongodb.net/gaurav-database?retryWrites=true&w=majority"
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then((result) => app.listen(3000))
+.catch((err) => console.log(err));
+
+// mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then((result) => app.listen(3000))
+//     .catch((err) => console.log(err));
 
 
 //MIDDLEWARES
