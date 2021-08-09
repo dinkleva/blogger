@@ -25,8 +25,8 @@ app.set('view engine', 'ejs');
 
 //connect to mongodb atlas database(gaurav-database)
 
-const dbURI = process.env.MONGODB_URI
-//const dbURI = "mongodb+srv://dinkleva_123:dinkleva123@cluster0.xhi9f.mongodb.net/gaurav-database?retryWrites=true&w=majority"
+//const dbURI = process.env.MONGODB_URI
+const dbURI = "mongodb+srv://dinkleva_123:dinkleva123@cluster0.xhi9f.mongodb.net/gaurav-database?retryWrites=true&w=majority"
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
