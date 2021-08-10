@@ -13,12 +13,13 @@ router.get('/', (req, res, next) =>{
 router.post('/verification', async (req, res) =>{
 
     const user = await User.findOne({email:req.body.email})
+    console.log(user)
     if(user == null){
         res.status(401).send('User not found')
     }
     try{
         if(await bcrypt.compare(req.body.password, user.password)){
-            res.redirect('/blogs', {username: user.name})
+            res.redirect('/blogs')
         }
         else{
             res.send('Not Allowed')
