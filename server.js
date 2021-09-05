@@ -2,15 +2,15 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose')
 const { models } = require('mongoose')
-
-
-
+const cookieParser = require('cookie-parser')
+const { requireAuth, checkUser } = require('./middleware/authMiddleware')
+require('dotenv').config()
 
 //Routers
 const blogRouter = require('./routes/blogRouter');
 const userRouter = require('./routes/userRouter')
-const signupRouter = require('./routes/signupRouter')
-const signinRouter = require('./routes/signinRouter')
+const authRouter = require('./routes/authRouter')
+
 
 //for all user authentication works
 // const { users } = require('./data');
@@ -26,19 +26,21 @@ app.set('view engine', 'ejs');
 //connect to mongodb atlas database(gaurav-database)
 
 // const dbURI = process.env.MONGODB_URI
-const dbURI = "mongodb+srv://dinkleva_123:dinkleva123@cluster0.xhi9f.mongodb.net/gaurav-database?retryWrites=true&w=majority"
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then((result) => app.listen(3000))
+const dbURI = process.env.MONGO_URI
+const port = process.env.PORT
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
+    .then((result) => app.listen(port))
     .catch((err) => console.log(err));
 
 
 //MIDDLEWARES
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}));
+app.use(express.json())
+app.use(cookieParser())
 
-
-
-
+//for each route we use *
+app.get('*', checkUser)
 
 app.get('/', (req, res) => {
     // res.sendFile('./views/index.html', {root: __dirname});
@@ -62,9 +64,12 @@ app.get('/about', (req, res) => {
 
 
 //All Middlewares
-app.use('/blogs', blogRouter)
-app.use('/signin', signinRouter)
-app.use('/signup', signupRouter)
+app.use('/blogs', requireAuth, blogRouter)
+
+//for login and signup
+app.use(authRouter)
+
+//
 app.use('/user', userRouter)
 
 

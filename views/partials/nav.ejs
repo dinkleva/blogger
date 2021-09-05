@@ -5,10 +5,15 @@
     
     <nav>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/signin">Signin</a></li>
-            <li><a href="/about">About</a></li>
+            <% if(user) { %>
+            <li><a href="/">Welcome, <%= user.name %></a> </li>
             <li><a href="/blogs/create">Write</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <% } else { %>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/about">About</a></li>
+            
+            <% } %>
         </ul>
     </nav>
 </div>

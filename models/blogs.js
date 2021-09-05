@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const User = require('./user')
 
 const blogSchema = new Schema({
     title: {
@@ -21,6 +22,16 @@ const blogSchema = new Schema({
     blog: {
         type: String,
         required: true
+    },
+    
+    author: {
+        
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
+        name: String,
+
     }
 
 }, {timestamps: true});

@@ -21,7 +21,9 @@
                                 <%= blog.blog %>
                             </p>
 
-                            <a class="delete" href="" data-doc="<%= blog._id %>">Delete</a>
+                            <% if(blog.author.name === user.name) { %>
+                                <a class="delete" href="" data-doc="<%= blog._id %>">Delete</a>
+                            <% } %>
                         </div>
                     </div>
                 </div>
