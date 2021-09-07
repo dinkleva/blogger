@@ -27,6 +27,10 @@
     "twilio": "^3.64.0",
     "validator": "^13.6.0"
   },
+  "engines": {
+    "node": "14.17.5",
+    "npm": "6.14.14"
+  },
   "myprivatekey": "myprivatekey",
   "repository": {
     "type": "git",
