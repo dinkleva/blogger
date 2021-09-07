@@ -6,7 +6,6 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
-
   },
   "author": "gaurav srivastava",
   "license": "MIT",
@@ -28,5 +27,14 @@
     "twilio": "^3.64.0",
     "validator": "^13.6.0"
   },
-  "myprivatekey": "myprivatekey"
+  "myprivatekey": "myprivatekey",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dinkleva/blogger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dinkleva/blogger/issues"
+  },
+  "homepage": "https://github.com/dinkleva/blogger#readme",
+  "keywords": []
 }

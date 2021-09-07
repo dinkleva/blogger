@@ -13,6 +13,7 @@
                 <div class="outer_div">
                     <div class="inner_div">
                         <div class="details_div">
+                            <h1>This post is posted by <%= blog.author.name %> </h1>
                             <h3>
                                 <%= blog.title %>
                             </h3>
@@ -23,6 +24,7 @@
 
                             <% if(blog.author.name === user.name) { %>
                                 <a class="delete" href="" data-doc="<%= blog._id %>">Delete</a>
+                                <a href="" class="edit" data-doc="<%= blog._id %>">Edit</a>
                             <% } %>
                         </div>
                     </div>
@@ -30,6 +32,8 @@
 
 
                 <script>
+
+                    //for deleting the post
                     const trashcan = document.querySelector('a.delete');
 
                     trashcan.addEventListener('click', (e) => {
@@ -37,7 +41,7 @@
 
                         fetch(endpoint, {
                             method: 'DELETE'
-                        })
+                            })
                             .then((response) => response.json())
                             .then((data) => {
                                 window.location.href = data.redirect;
