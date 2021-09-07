@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 
 
 // const dbURI = process.env.MONGODB_URI
-const dbURI = process.env.MONGO_URI
+const dbURI = process.env.MONGODB_URI
 const port = process.env.PORT
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
     .then((result) => app.listen(port))
