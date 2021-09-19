@@ -13,19 +13,19 @@
 
             <%- include('../partials/nav.ejs') %>
 
-            <form action="/blogs" method="POST">
+            <form action="/blogs/create" method="POST">
 
             
-                <input type="text" id="title" placeholder="Title" name="title">
+                <input type="text" id="title" placeholder="Title" name="title" value="<%= blog.title %>">
                 <label for="title">Title</label><br>
                 
-                <input type="text" id="snippet" name="snippet">
+                <input type="text" id="snippet" name="snippet" value="<%= blog.snippet %>">
                 <label for="snippet">Snippet</label><br>
             
-                <textarea name="blog" placeholder="Write.." id="text-area" cols="50" rows="30"
-                    onchange="changebordercolor()"></textarea><br>
+                <textarea name="blog" placeholder="Write..." id="text-area" cols="50" rows="30"
+                    onchange="changebordercolor()"><%= blog.blog %></textarea><br>
 
-                <button class="blog-publish-button">Publish</button>
+                <button class="blog-publish-button" data-doc="<%= blog._id %>">Publish</button>
             </form>
 
 
@@ -34,6 +34,40 @@
 
 
         <script>
+            const title = document.querySelector('input#title').value
+            const snippet = document.querySelector('input#snippet').value
+            const blog = document.querySelector('input#text-area')
+
+            const form = document.querySelector('form')
+            const button = document.querySelector('.blog-publish-button')
+
+
+
+            button.addEventListener('click', async (e) =>{
+                const endpoint_for_editing_blog = `/blogs/me/${button.dataset.doc}/edit`
+                    const res = await fetch(endpoint_for_editing_blog, {
+                        method: 'PUT',
+                        headers: {'Content-Type' : 'application/json'},
+                        body:JSON.stringify({
+                            title,
+                            snippet,
+                            blog,
+
+                        })
+                    })
+
+                    const data = await res.json()
+                    if(data.user){
+                        location.assign('/')
+                    }
+                
+
+            })
+
+
+
+
+
             var text_area = document.getElementById('text-area');
             text_area.style.border = "0px";
             text_area.style.borderTopColor = "red";
@@ -41,6 +75,7 @@
             text_area.addEventListener("click", () => {
                 text_area.style.border = "0px";
             });
+
         </script>
 
 
@@ -48,3 +83,7 @@
     </body>
 
 </html>
+
+
+
+

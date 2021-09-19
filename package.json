@@ -4,7 +4,7 @@
   "description": "blogging website",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "dev": "nodemon server.js"
   },
   "author": "gaurav srivastava",
@@ -19,6 +19,7 @@
     "express": "^4.17.1",
     "joi": "^17.4.1",
     "jsonwebtoken": "^8.5.1",
+    "method-override": "^3.0.0",
     "mongodb": "^4.1.1",
     "mongoose": "^5.13.0",
     "nginx": "^1.0.3",

@@ -25,13 +25,8 @@ const blogSchema = new Schema({
     },
     
     author: {
-        
-        id: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-        },
         name: String,
-
+        id:{type: Schema.Types.ObjectId, ref: 'User',}
     }
 
 }, {timestamps: true});

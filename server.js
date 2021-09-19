@@ -5,7 +5,7 @@ const { models } = require('mongoose')
 const cookieParser = require('cookie-parser')
 const { requireAuth, checkUser } = require('./middleware/authMiddleware')
 require('dotenv').config()
-
+const methodOverride = require('method-override')
 
 
 
@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 
 
 // const dbURI = process.env.MONGODB_URI
-const dbURI = process.env.MONGODB_URI
+const dbURI = process.env.MONGO_URI
 const port = process.env.PORT
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true , useCreateIndex: true})
     .then((result) => app.listen(port))
@@ -54,8 +54,10 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(methodOverride('_method'))
 //for each route we use *
+
+
 app.get('*', checkUser)
 
 app.get('/', (req, res) => {

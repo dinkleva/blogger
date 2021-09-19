@@ -23,8 +23,9 @@
                             </p>
 
                             <% if(blog.author.name === user.name) { %>
-                                <a class="delete" href="" data-doc="<%= blog._id %>">Delete</a>
-                                <a href="" class="edit" data-doc="<%= blog._id %>">Edit</a>
+                                <a class="delete" href="/" data-doc="<%= blog._id %>">Delete</a>
+                                <a href="/blogs/me/<%= blog._id  %>/edit" class="edit" data-doc="<%= blog._id %>">Edit</a>
+                                <!-- <a href="/blogs/<%= blog._id  %>/edit" class="edit" data-doc="<%= blog._id %>">Edit</a> -->
                             <% } %>
                         </div>
                     </div>
@@ -33,13 +34,13 @@
 
                 <script>
 
-                    //for deleting the post
-                    const trashcan = document.querySelector('a.delete');
+                    //for deleting the blog
+                    const _delete = document.querySelector('a.delete');
+                    
+                    _delete.addEventListener('click', async (e) => {
+                        const endpoint = `/blogs/${_delete.dataset.doc}`;
 
-                    trashcan.addEventListener('click', (e) => {
-                        const endpoint = `/blogs/${trashcan.dataset.doc}`;
-
-                        fetch(endpoint, {
+                        await fetch(endpoint, {
                             method: 'DELETE'
                             })
                             .then((response) => response.json())
@@ -48,6 +49,17 @@
                             })
                             .catch(err => console.log(err));
                     })
+                    
+                    //for editing the blog
+                    const _editing = document.querySelector('a.edit')
+                    _editing.addEventListener('click', async (e) =>{
+
+                        const endpoint_for_editing_blog = `/blogs/me/${_editing.dataset.doc}/edit`
+                        const res = await fetch(endpoint_for_editing_blog, {
+                            method: 'GET'
+                        })
+                    })
+                    
 
                 </script>
 
