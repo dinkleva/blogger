@@ -95,19 +95,21 @@ const blog_edit_get = (req, res) =>{
 //editing will be done and replaced in datatbase for the blog
 const blog_edit_put = async (req, res) => {
     const blogid = req.params.id
-    console.log(blogid)
-    let blog
+    var blog
     try{
 
     blog = await Blog.findOneAndUpdate({_id: blogid}, {$set: {title: req.body.title, snippet: req.body.snippet, blog: req.body.blog}}, {
         
         useFindAndModify:false,
     })
-    console.log(blog)
+    await Blog.findByIdAndDelete({_id: blogid})
+    // console.log(blog)
     const userid = blog.author.id
     const user = await User.findById({_id: userid})
-    blog.update()
+    
+    // blog.update()
     // res.cookie('user', user, { httpOnly: true , secure: true})
+    console.log(blog._id)
     res.status(201).json({ user: user })
 
     }
